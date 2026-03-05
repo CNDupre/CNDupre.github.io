@@ -49,7 +49,7 @@ function setupVisualizer() {
             let barHeight = dataArray[i] * 1.7;
             
             ctx.shadowBlur = 27;
-            ctx.shadowColor = 'red';
+            ctx.shadowColor = 'purple';
             ctx.fillStyle = `hsl(${i * 5}, 90%, 60%)`;
             ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
             
