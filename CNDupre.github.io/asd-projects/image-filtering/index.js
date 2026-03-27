@@ -22,6 +22,7 @@ function applyAndRender() {
   // Multiple TODOs: Call your apply function(s) here
   applyFilterNoBackground(reddify);
   applyFilter(decreaseBlue);
+  applyFilter(increaseGreenByBlue);
   applyFilterNoBackground(increaseGreenByBlue);
   // do not change the below line of code
   render($("#display"), image);
