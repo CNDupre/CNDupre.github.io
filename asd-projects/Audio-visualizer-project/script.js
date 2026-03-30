@@ -35,31 +35,25 @@ function setupVisualizer() {
         analyser.connect(audioContext.destination);
     }
 
-    analyser.fftSize = 2048;
+    analyser.fftSize = 256;
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
     const barWidth = canvas.width / bufferLength;
 
     function animate() {
         let x = 0;
-
-        // Create the fade effect by painting a translucent black layer
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.2)'; 
-        ctx.fillRect(0, 0, canvas.width, canvas.height);
-
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
         analyser.getByteFrequencyData(dataArray);
 
-        // Set shadow and solid color once (better performance than inside the loop)
-        ctx.shadowBlur = 2; 
-        ctx.shadowColor = '#2ef70f'; // Brighter neon color
-        ctx.fillStyle = '#00ffff';   // Match the bar to the shadow for a glow effect
-
         for (let i = 0; i < bufferLength; i++) {
-            let barHeight = dataArray[i] * 2;
-
-            ctx.fillRect(x, canvas.height - barHeight, barWidth - 1, barHeight);
-
-            x += barWidth; // Removed the * 2 to prevent gaps if you want a solid wall
+            let barHeight = dataArray[i] * 1.7;
+            
+            ctx.shadowBlur = 27;
+            ctx.shadowColor = 'purple';
+            ctx.fillStyle = `hsl(${i * 5}, 90%, 60%)`;
+            ctx.fillRect(x, canvas.height - barHeight, barWidth - 2, barHeight);
+            
+            x += barWidth;
         }
         requestAnimationFrame(animate);
     }
